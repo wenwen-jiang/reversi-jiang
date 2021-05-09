@@ -1,0 +1,29 @@
+{
+  "name": "reversi-jiang",
+  "version": "1.0.0",
+  "description": "This is the web app game of reversi",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wenwen-jiang/reversi-jiang.git"
+  },
+  "keywords": [
+    "reversi",
+    "game",
+    "wenwenjiang",
+    "webapp"
+  ],
+  "author": "Wenwen Jiang",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/wenwen-jiang/reversi-jiang/issues"
+  },
+  "homepage": "https://github.com/wenwen-jiang/reversi-jiang#readme",
+  "dependencies": {
+    "node-static": "^0.7.11",
+    "socket.io": "^4.0.2"
+  }
+}
