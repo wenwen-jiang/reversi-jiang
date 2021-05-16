@@ -23,6 +23,14 @@
       ul li{
           list-style-type: none;
           margin-left: 2rem;
+      }  
+      .content_txt{
+        font-family: 'Special Elite', cursive;
+        color:#fff;
+      }
+      .content_txt p{
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
       }
       .link {
           font-size: 1.7rem;
@@ -40,51 +48,11 @@
       .current{
         color:#F55B4B;
       }
-      .form-control{
-        padding: 1rem!important;
-        border: 4px solid #0EA1F2 !important;
-        border-radius: .75rem !important;
-        background-color: #393760 !important;
-        font-size:1.25rem;
-        color:#fff;
+      
+      .reversi_red{
+        color:#f88174;
       }
-      .form-control:focus {
-        color: #fff;
-        background-color: #393760;
-        border-color: #86b7fe;
-        outline: 0;
-        box-shadow: 0 0 0 0.25rem rgba(15, 102, 231, 0.25);
-      }
-     .btn_lobby{
-        color: #fff;
-        background-color: #0EA1F2;
-     }
-     .btn{
-        font-size: 1.25rem;
-        padding: 1.1rem 2rem !important; 
-        border-radius: .75rem;
-      }
-      .btn-primary {
-        color: #fff;
-        background-color: #0EA1F2;
-        border-color: #0EA1F2;
-      }
-      .btn-primary:hover {
-        color: #fff;
-        background-color: #F55B4B;
-        border-color: #0d6efd;
-      }
-      .btn-primary:focus {
-        color: #fff;
-        background-color: #F55B4B;
-        border-color: #0a58ca;
-        box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
-      }
-      .image2 {
-        width: 100%;
-        max-width: 560px;
-        height: auto;
-      }
+
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -102,43 +70,15 @@
         width:100%;
         height:100%;
       }
-      h4{margin-bottom: 24px;}
-      .py-6 {margin-top: 7rem !important; padding-bottom: 4rem !important;}
-      .row_box{display: inline-block; width: 100%; margin-bottom: 15px;}
-      .row_box h3{
-        color: #333333;
-        background-color: #f5f5f5;
-        font-size: 18px;
-        font-weight: 500;
-        text-align: center;
-        letter-spacing: .1rem;
-        padding: 15px;
-        margin-bottom: 0;
-      }
-      .row_box .subox {
-        background-color: #fff;
-        color: #555555;
-        border: 1px solid #e5e5e5;
-        border-top: none;
-        display: inline-block;
-        width: 100%;
-        font-size: 48px;
-        text-align: center;
-        padding: 42px 15px;
-      }
-      .row_box:hover .subox {
-        background-color: #555555;
-        color: #fff;
-      }
-      
     </style>
+
     <style>
       /* Copyright 2017-present by Premiumwebs. All rights reserved. */
-      .image {
+      .image3 {
         width: 100%;
-        max-width: 460px;
+        max-width: 500px;
         height: auto;
-      }
+      }   
       .col-lg-3, .col-md-4, .col-sm-6{
         position: relative;
         min-height: 40px;
@@ -147,41 +87,43 @@
         display: inline;
       }
     </style>
-    
   </head>
+
   <body>
     <main class="container">
       <header class="p-4 text-white">
           <div class="flex-wrap justify-content-lg-start text-end">
               <ul class="nav col-12 col-lg-auto me-lg-auto my-2 justify-content-end mb-md-0 text-end">
-                <li><a href="about.html" class="link px-2">About</a></li>
+                <li><a href="about.html" class="link px-2 current">About</a></li>
                 <li><a href="https://en.wikipedia.org/wiki/Reversi" class="link px-2">Rules</a></li>
               </ul>
-        </div>
+          </div>
       </header>
   
-      <section class="py-4 text-center">
+      <section class="py-4">
         <div class="row py-lg-5">
-          <div class="col-lg-6 col-md-8 mx-auto">
-              <img src="images/reversi_logo.png" alt="" class="image"/>
-          </div>
-        </div>
-      </section>
+          <div class="col-md-12">
+            <div class="row g-0 rounded overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+              <div class="col-auto d-none d-lg-block">
+                <img src="images/about_img.png" aria-label="about reversi" class="image3" />
+              </div>
 
-      <section class="py-3 text-center">
-        <div class="d-flex flex-wrap align-items-center justify-content-center">
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" id="displayName">
-              <input type="text" class="form-control" placeholder="Input your name" aria-label="Enter a username for your player role" aria-describedby="displayName" id="nameInput"/>
-            </form>
-            <div class="text-end">
-              <button type="submit" class="btn btn-primary me-2" id="lobbyButton" onclick="window.location='lobby.html'">Lobby</button>
+              <div class="col p-5 d-flex flex-column position-static content_txt">
+                <h3 class="mb-4">About Reversi</h3>
+                <h5 class="mb-4 reversi_red">Designed by Wenwen Jiang</h5>
+                <p>Reversi offers a host of exciting features, including great graphics and configuraable player names and score tracking, outstanding AI engine and automatic save when you exit the application.</p>
+                <p>Reversi is a strategy board game for two players. The goal is to have mahority of disks reversed to display your own color at the end of the game. Place your pieces carefully and defeat your opponent in this back and forth battle.</p>
+                <p>With the right stratery, tactics and observation skills you will eventually find yourself amongst the top players. Can you make it?</p>
+                <p>Play this fancy Reversi game now for free!</p>
+              </div>
+             
             </div>
           </div>
-      </section>
+          
+          <div class="mb-5"></div>
 
-      <section class="py-6 text-center">
-        <img src="images/btm_banner.png" alt="" class="image2"/>
-      </section>  
+        </div>
+      </section>
     </main>
     
 
