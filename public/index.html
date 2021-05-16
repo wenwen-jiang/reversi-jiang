@@ -174,7 +174,7 @@
               <input type="text" class="form-control" placeholder="Input your name" aria-label="Enter a username for your player role" aria-describedby="displayName" id="nameInput"/>
             </form>
             <div class="text-end">
-              <button type="submit" class="btn btn-primary me-2" id="lobbyButton" onclick="window.location='lobby.html'">Lobby</button>
+              <button type="submit" class="btn btn-primary me-2" id="lobbyButton" onclick="goToLobby()">Lobby</button>
             </div>
           </div>
       </section>
@@ -186,6 +186,17 @@
     
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"
+  ></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
+  <script>
+    function goToLobby() {
+      let username = $(`#nameInput`).val();
+      window.location.href = "lobby.html?username=" + username;
+    }
+  </script>
   </body>
 </html>
