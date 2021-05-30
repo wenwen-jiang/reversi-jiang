@@ -146,9 +146,12 @@ io.on('connection', (socket) => {
                         /** tell everyone that a new user has joined the chat room */
                     io.of("/").to(room).emit("join_room_response", response);
                     serverLog("join_room succeeded ", JSON.stringify(response));
+<<<<<<< HEAD
                     if (room !== "Lobby") {
                         send_game_update(socket, room, 'initial update');
                     }
+=======
+>>>>>>> 4f14cdbf419586b704901563343d63bc14933ecd
                 }
             }
         });
@@ -249,6 +252,7 @@ io.on('connection', (socket) => {
         io.of("/").to(room).emit("send_chat_message_response", response);
         serverLog("send_chat_message command succeeded", JSON.stringify(response));
     });
+<<<<<<< HEAD
 });
 
 
@@ -313,3 +317,6 @@ function send_game_update(socket, game_id, message) {
     }
     io.of("/").to(game_id).emit('game_update', payload);
 }
+=======
+});
+>>>>>>> 4f14cdbf419586b704901563343d63bc14933ecd

@@ -143,7 +143,11 @@ function sendChatMessage() {
     $('#chatMessage').val("");
 }
 
+<<<<<<< HEAD
 socket.on('send_chat_message_response', (payload) => {
+=======
+socket.on('send_chat_message_response', function(payload) {
+>>>>>>> 4f14cdbf419586b704901563343d63bc14933ecd
     if (typeof payload == "undefined" || payload === null) {
         console.log('Server did not send a payload')
         return;
@@ -161,6 +165,7 @@ socket.on('send_chat_message_response', (payload) => {
     newNode.show('fade', 500);
 });
 
+<<<<<<< HEAD
 
 let old_board = [
     ['?', '?', '?', '?', '?', '?', '?', '?'],
@@ -241,6 +246,8 @@ socket.on('game_update', (payload) => {
 });
 
 
+=======
+>>>>>>> 4f14cdbf419586b704901563343d63bc14933ecd
 /******* Request to join the chat room */
 $(() => {
     let request = {}
