@@ -206,7 +206,7 @@ socket.on('join_room_response', function(payload) {
     nodeA.show("fade", 1000);
 
     /** Announcing in the chat that someone has arrived */
-    let newHTML = '<p class = \'join_room_response\'>' + payload.username + ' joined the ' + payload.room + '. (There are ' + payload.count + ' users in this room) </p>';
+    let newHTML = '<p class = \'join_room_response\'>' + payload.username + ' joined the chatroom. ( There are ' + payload.count + ' users in this room ) </p>';
     let newNode = $(newHTML);
     newNode.hide();
     $('#messages').prepend(newNode);
@@ -277,6 +277,8 @@ let old_board = [
     ['?', '?', '?', '?', '?', '?', '?', '?']
 ];
 
+let my_color = ""
+
 socket.on('game_update', (payload) => {
     if (typeof payload == "undefined" || payload === null) {
         console.log('Server did not send a payload');
@@ -295,17 +297,37 @@ socket.on('game_update', (payload) => {
     }
 
     /** Update my color */
+    if (socket.id === payload.game.player_white.socket) {
+        my_color = "white"
+    } else if (socket.id === payload.game.player_black.socket) {
+        my_color = "black"
+    } else {
+        window.location.href = "lobby.html?username=" + username;
+        return;
+    }
 
+    let finalColor = my_color === "white" ? "blue" : "red"
+
+    $("#my_color").html('<h4 id="my_color">I am ' + finalColor + '</h4>');
+
+    let whiteSum = 0;
+    let blackSum = 0;
 
     /** Animate change to the board */
     for (let row = 0; row < 8; row++) {
         for (let column = 0; column < 8; column++) {
+            if (board[row][column] === "w") {
+                whiteSum++;
+            } else if (board[row][column] === "b") {
+                blackSum++;
+            }
+
             /** Check to see if the server changed any space on the board */
             if (old_board[row][column] !== board[row][column]) {
                 let graphic = "";
                 let altTag = "";
                 if ((old_board[row][column] === '?') && (board[row][column] === ' ')) {
-                    graphic = "empty.gif";
+                    graphic = "empty.png";
                     altTag = "empty space";
                 } else if ((old_board[row][column] === '?') && (board[row][column] === 'w')) {
                     graphic = "empty_to_blue.gif";
@@ -332,18 +354,75 @@ socket.on('game_update', (payload) => {
                     graphic = "red_to_blue.gif";
                     altTag = "red token";
                 } else {
-                    graphic = "error.gif";
+                    graphic = "error.png";
                     altTag = "error";
                 }
 
                 const t = Date.now();
                 $('#' + row + '_' + column).html('<img class="img-fluid" src="images/' + graphic + '?time=' + t + '" alt="' + altTag + '" />');
+
+                $('#' + row + '_' + column).off('click');
+                if (board[row][column] === ' ') {
+                    $('#' + row + '_' + column).addClass("hovered_over");
+                    $('#' + row + '_' + column).click(((r, c) => {
+                        return (() => {
+                            let payload = {
+                                row: r,
+                                column: c,
+                                color: my_color
+                            };
+                            console.log("****** Client log message, send \'play_token \' command " + JSON.stringify(payload));
+                            socket.emit("play_token", payload);
+                        });
+                    })(row, column));
+                } else {
+                    $('#' + row + '_' + column).removeClass("hovered_over");
+                }
             }
         }
     }
+
+    $("#whiteSum").html(whiteSum);
+    $("#blackSum").html(blackSum);
     old_board = board;
 });
 
+socket.on('play_token_response', (payload) => {
+    if (typeof payload == "undefined" || payload === null) {
+        console.log('Server did not send a payload')
+        return;
+    }
+
+    if (payload.result === 'fail') {
+        console.log(payload.message)
+        return;
+    }
+});
+
+socket.on('game_over', (payload) => {
+    if (typeof payload == "undefined" || payload === null) {
+        console.log('Server did not send a payload')
+        return;
+    }
+
+    if (payload.result === 'fail') {
+        console.log(payload.message)
+        return;
+    }
+
+    /** Announce with a button to the lobby */
+    let nodeA = $("<div id='game_over'></div>");
+    let nodeB = $("<h1>Game Over</h1>");
+    let nodeC = $("<h2>" + payload.who_won + " won! </h2>");
+    let nodeD = $("<a href='lobby.html?username=" + username + "' class='btn btn-lg btn-success' role='button'>Return to lobby</a>");
+
+    nodeA.append(nodeB)
+    nodeA.append(nodeC)
+    nodeA.append(nodeD)
+    nodeA.hide();
+    $("#game_over").replaceWith(nodeA);
+    nodeA.show("fade", 1000);
+});
 
 /******* Request to join the chat room */
 $(() => {
@@ -354,6 +433,7 @@ $(() => {
     socket.emit('join_room', request);
 
     $('#lobbyTitle').html(username + "'s Lobby");
+    $('#quit').html("<a href='lobby.html?username=" + username + "' class='btn btn-lg btn-success' role='button'>Quit</a>");
 
     $('#chatMessage').keypress(function(e) {
         let key = e.which;

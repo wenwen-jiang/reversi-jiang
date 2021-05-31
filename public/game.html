@@ -165,36 +165,53 @@
             </div>
         </section>
 
-        <section class="py-5">
-            <div class="d-flex align-items-center p-3 my-3 text-white bg-purple over_pane">
-                <h2 class="lh-1 reversi_red" id="game_over">Game Over</h2>
-            </div>
-        </section>
-
-        <section class="py-5">
-            <div class="col-md-8 text-center justify-content-center">
-                <h3 id="my_color">My Color</h2>
-                    <img class="img-fluid" src="images/blueToken.gif" alt="Blue Score" />
-                    <span id="whitesum">Blue Sum</span>
-                    <span id="vs">vs</span>
-                    <span id="blacksum">Red Sum</span>
-                    <img class="mg-fluid" src="images/redToken.gif" alt="Red Score" />
-            </div>
-            <div class="col-md-4 text-end justify-content-end">
-                <div id="quit">Quit Button</div>
+        <section class="content_txt navbar">
+            <div class="container-fluid">
+                <h3 class="mb-3" id="WelcomeUsername"></h3>
+                <div class="text-end justify-content-end">
+                    <div id="quit">Quit Button</div>
+                </div>
             </div>
         </section>
 
 
-
-
-        <section class="content_txt row">
-            <h3 class="mb-3" id="WelcomeUsername"></h3>
+        <section class="py-2">
+            <div class="d-flex align-items-center p-3 my-3 text-white bg-purple message_pane">
+                <h4 class="lh-1 text-white" id="game_over">Playing Gmaing</h4>
+            </div>
         </section>
+
+        <section class="container justify-content-center content_txt text-center mt-4">
+            <div id="my_color" class="mycolor">My Color</div>
+        </section>
+
+        <section class="container mb-5 d-flex justify-content-center content_txt">
+            <div class="card p-3">
+                <div class="d-flex align-items-center">
+                    <div class="image"> <img class="img-fluid" src="images/blueToken.png" alt="Blue Score" /></div>
+                    <div class="w-100 p-2 mt-2 d-flex rounded" style="color: darkblue;">
+                        <div class="d-flex flex-column"> <span class="articles">Score</span> <span id="whiteSum" class="number2">Blue Sum</span> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-3">
+                <span id="vs" style="font-size: 3rem; font-weight: bold;">  vs  </span>
+            </div>
+            <div class="card p-3">
+                <div class="d-flex align-items-center">
+                    <div class="image"> <img class="mg-fluid" src="images/redToken.png" alt="Red Score" /></div>
+                    <div class="w-100 p-2 mt-2 d-flex rounded" style="color: darkblue;">
+                        <div class="d-flex flex-column"> <span class="articles">Score</span> <span id="blackSum">Red Sum</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
 
         <section class="content_txt">
             <div class="row mb-5">
-                <div class="col-md-7 justify-content-center">
+                <div class="col-md-6 justify-content-center">
                     <div class="row overflow-hidden mb-5 flex-md-row table-responsive">
 
                         <table class="mx-auto w-auto" id="game_board">
@@ -283,7 +300,7 @@
                     </div>
                 </div>
 
-                <div class="content_txt mb-5 col-md-5" id="messagePane">
+                <div class="content_txt mb-6 col-md-5" id="messagePane">
                     <div class="mb-3 p-4 message_pane">
                         <h4 class="border-bottom-2 pb-3 mb-3">Messages</h4>
                         <div class="input-group mb-3 justify-content-center">
