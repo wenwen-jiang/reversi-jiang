@@ -1,55 +1,69 @@
-        .join_room_response {
-            padding-top: 10px;
-            font-size: 1rem;
-            color: #6877a9;
-        }
-        
-        .chat_message {
-            font-size: 1.5rem;
-        }
-        
-        .message_pane {
-            background-color: #1b348c;
-            border-radius: 10px;
-        }
-        
-        .over_pane {
-            background-color: #A8B9F4;
-            border-radius: 10px;
-        }
-        
-        .pt-12rem {
-            padding-top: 1.2rem !important;
-        }
-        
-        .text-muted strong {
-            padding-top: 3px;
-        }
-        
-        .border-bottom-2 {
-            border-bottom: 1px solid #3b56b6 !important;
-        }
-        
-        .input-group .btn {
-            padding: 0.375rem 1.5rem !important;
-        }
-        
-        table#game_board {
-            border: 8px solid white;
-            background-color: #41C0E3;
-            margin: 0px;
-            padding: 0px;
-        }
-        
-        table#game_board td {
-            border: 1px solid #fff;
-        }
-        
-        td.hovered_over:hover {
-            background-image: url('../images/hover.gif');
-        }
-        
-        .mycolor {
-            font-size: 1.5rem;
-            color: #fff;
-        }
+.join_room_response {
+    padding-top: 10px;
+    font-size: 1rem;
+    letter-spacing: -1px;
+    color: #97A6DD;
+}
+
+.left_room_response {
+    padding-top: 10px;
+    font-size: 1rem;
+    letter-spacing: -1px;
+    color: #F8B6AE;
+}
+
+#game_over {
+    background-color: #1b348c;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+}
+
+.chat_message {
+    font-size: 1.5rem;
+}
+
+.message_pane {
+    background-color: #1b348c;
+    border-radius: 10px;
+}
+
+.over_pane {
+    background-color: #A8B9F4;
+    border-radius: 10px;
+}
+
+.pt-12rem {
+    padding-top: 1.2rem !important;
+}
+
+.text-muted strong {
+    padding-top: 3px;
+}
+
+.border-bottom-2 {
+    border-bottom: 1px solid #3b56b6 !important;
+}
+
+.input-group .btn {
+    padding: 0.375rem 1.5rem !important;
+}
+
+table#game_board {
+    border: 8px solid white;
+    background-color: #41C0E3;
+    margin: 0px;
+    padding: 0px;
+}
+
+table#game_board td {
+    border: 1px solid #fff;
+}
+
+td.hovered_over:hover {
+    background-image: url('../images/hover.gif');
+}
+
+.mycolor {
+    font-size: 1.5rem;
+    color: #fff;
+}
