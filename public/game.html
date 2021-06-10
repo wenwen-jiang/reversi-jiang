@@ -122,6 +122,16 @@
             border-color: #f75745;
             box-shadow: 0 0 0 0.18rem rgba(49, 132, 253, 0.5);
         }
+        
+        .progress {
+            width: 87%;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background-color: #41C0E3 !important;
+            border-radius: 1rem !important;
+        }
         /* Copyright 2017-present by Premiumwebs. All rights reserved. */
         
         .image {
@@ -168,8 +178,8 @@
 
         <section class="content_txt navbar">
             <div class="container-fluid">
-                <h3 class="mb-3" id="WelcomeUsername"></h3>
-                <div class="text-end justify-content-end">
+                <h3 id="WelcomeUsername"></h3>
+                <div class="text-end justify-content-end mb-3">
                     <div id="quit">Quit Button</div>
                 </div>
             </div>
@@ -177,12 +187,12 @@
 
 
         <section class="py-2">
-            <div class="align-items-center p-3 my-3 text-white bg-purple content_txt">
+            <div class="align-items-center text-white bg-purple content_txt text-center">
                 <h4 class="lh-1 text-white" id="game_over"></h4>
             </div>
         </section>
 
-        <section class="container justify-content-center content_txt text-center mt-4">
+        <section class="container justify-content-center content_txt text-center m-4">
             <div id="my_color" class="mycolor">My Color</div>
         </section>
 
@@ -190,7 +200,7 @@
             <div class="card p-3">
                 <div class="d-flex align-items-center">
                     <div class="image"> <img class="img-fluid" src="images/blueToken.png" alt="Blue Score" /></div>
-                    <div class="w-100 p-2 mt-2 d-flex rounded" style="color: darkblue;">
+                    <div class="w-100 p-2 mt-2 d-flex rounded">
                         <div class="d-flex flex-column"> <span class="articles">Score</span> <span id="whiteSum" class="number2">Blue Sum</span> </div>
                     </div>
                 </div>
@@ -201,8 +211,8 @@
             <div class="card p-3">
                 <div class="d-flex align-items-center">
                     <div class="image"> <img class="mg-fluid" src="images/redToken.png" alt="Red Score" /></div>
-                    <div class="w-100 p-2 mt-2 d-flex rounded" style="color: darkblue;">
-                        <div class="d-flex flex-column"> <span class="articles">Score</span> <span id="blackSum">Red Sum</span></div>
+                    <div class="w-100 p-2 mt-2 d-flex rounded">
+                        <div class="d-flex flex-column"> <span class="articles">Score</span> <span id="blackSum" class="number2">Red Sum</span></div>
                     </div>
                 </div>
             </div>

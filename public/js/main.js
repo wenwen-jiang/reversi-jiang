@@ -315,11 +315,11 @@ socket.on('game_update', (payload) => {
     }
 
     if (payload.game.whose_turn === "white") {
-        $("#my_color").append('<h4>It is blue\'s turn</h4>');
+        $("#my_color").append('<h3>It is blue\'s turn</h3>');
     } else if (payload.game.whose_turn === "black") {
-        $("#my_color").append('<h4>It is red\'s turn</h4>');
+        $("#my_color").append('<h3>It is red\'s turn</h3>');
     } else {
-        $("#my_color").append('<h4 id="my_color">Error: I don\'t know whoes turn it is</h4>');
+        $("#my_color").append('<h3 id="my_color">Error: I don\'t know whoes turn it is</h3>');
     }
 
     let whiteSum = 0;
@@ -453,13 +453,14 @@ socket.on('game_over', (payload) => {
     let nodeA = $("<div id='game_over'></div>");
     let nodeB = $("<h1>Game Over</h1>");
     let nodeC = $("<h2>" + payload.who_won + " won! </h2>");
-    let nodeD = $("<a href='lobby.html?username=" + username + "' class='btn btn-lg btn-success' role='button'>Return to lobby</a>");
+    let nodeD = $("<a href='lobby.html?username=" + username + "' class='btn btn-lg btn-primary' role='button'>Return to lobby</a>");
 
     nodeA.append(nodeB)
     nodeA.append(nodeC)
     nodeA.append(nodeD)
     nodeA.hide();
     $("#game_over").replaceWith(nodeA);
+    $("#game_over").css("background-color", "#F55B4B;");
     nodeA.show("fade", 1000);
 });
 
@@ -472,7 +473,7 @@ $(() => {
     socket.emit('join_room', request);
 
     $('#lobbyTitle').html(username + "'s Lobby");
-    $('#quit').html("<a href='lobby.html?username=" + username + "' class='btn btn-lg btn-success' role='button'>Quit</a>");
+    $('#quit').html("<a href='lobby.html?username=" + username + "' class='btn btn-lg btn-primary' role='button'>Quit</a>");
 
     $('#chatMessage').keypress(function(e) {
         let key = e.which;

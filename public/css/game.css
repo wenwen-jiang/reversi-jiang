@@ -12,9 +12,21 @@
 }
 
 #game_over {
-    background-color: #1b348c;
     border-radius: 10px;
     padding: 1rem 1.5rem;
+}
+
+#my_color h3 {
+    margin: 10px 0;
+}
+
+.number2 {
+    font-size: 1.75rem;
+    color: #0D2474;
+}
+
+.articles {
+    color: #fff;
 }
 
 .chat_message {

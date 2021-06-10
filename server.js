@@ -575,7 +575,7 @@ io.on("connection", (socket) => {
             serverLog("play_token command failed", JSON.stringify(response));
             return;
         }
-    
+
         let player = players[socket.id];
         if (typeof player == "undefined" || player === null) {
             let response = {};
@@ -585,7 +585,7 @@ io.on("connection", (socket) => {
             serverLog("play_token command failed", JSON.stringify(response));
             return;
         }
-    
+
         let username = player.username;
         if (typeof username == "undefined" || username === null || username == "") {
             let response = {};
@@ -595,7 +595,7 @@ io.on("connection", (socket) => {
             serverLog("play_token command failed", JSON.stringify(response));
             return;
         }
-    
+
         let game_id = player.room;
         if (typeof game_id == "undefined" || game_id === null || game_id == "") {
             let response = {};
@@ -605,7 +605,7 @@ io.on("connection", (socket) => {
             serverLog("play_token command failed", JSON.stringify(response));
             return;
         }
-    
+
         let row = payload.row;
         if (typeof row == "undefined" || row === null) {
             let response = {};
@@ -615,9 +615,9 @@ io.on("connection", (socket) => {
             serverLog("play_token command failed", JSON.stringify(response));
             return;
         }
-    
+
         let column = payload.column;
-        if (typeof column == "undefined" || column === null ) {
+        if (typeof column == "undefined" || column === null) {
             let response = {};
             response.result = "fail";
             response.message = "There was no valid column associated with the play_token command";
@@ -625,7 +625,7 @@ io.on("connection", (socket) => {
             serverLog("play_token command failed", JSON.stringify(response));
             return;
         }
-    
+
         let color = payload.color;
         if (typeof color == "undefined" || color === null || color == "") {
             let response = {};
@@ -635,7 +635,7 @@ io.on("connection", (socket) => {
             serverLog("play_token command failed", JSON.stringify(response));
             return;
         }
-    
+
         let game = games[game_id];
         if (typeof game == "undefined" || game === null || game == "") {
             let response = {};
@@ -647,7 +647,7 @@ io.on("connection", (socket) => {
         }
 
         /* Make sure the current attempt is by the correct color */
-        if(color !== game.whose_turn){
+        if (color !== game.whose_turn) {
             let response = {
                 result: "fail",
                 message: "play_token played the wrong color. it is not their turn"
@@ -657,9 +657,9 @@ io.on("connection", (socket) => {
             return;
         }
 
-         /* Make sure the current play is coming from the expected player*/
-         if(((game.whose_turn === "white") && (game.player_white.socket != socket.id)) ||
-         ((game.whose_turn === "black") && (game.player_black.socket != socket.id))){
+        /* Make sure the current play is coming from the expected player*/
+        if (((game.whose_turn === "white") && (game.player_white.socket != socket.id)) ||
+            ((game.whose_turn === "black") && (game.player_black.socket != socket.id))) {
             let response = {
                 result: "fail",
                 message: "play_token played the right color. but by the wrong player"
@@ -672,10 +672,10 @@ io.on("connection", (socket) => {
         /** handle the command */
         // socket.join(room);
         let response = {
-            result : "success"
+            result: "success"
         };
-        socket.emit("play_token_response",response)
-       
+        socket.emit("play_token_response", response)
+
         /** Execute the move */
         if (color === "white") {
             game.board[row][column] = "w";
@@ -689,10 +689,10 @@ io.on("connection", (socket) => {
             game.legal_moves = calculate_legal_move("w", game.board)
 
         }
-        
+
         let d = new Date();
         game.last_move_time = d.getTime()
-        send_game_update(socket,game_id, "played a token")
+        send_game_update(socket, game_id, "played a token")
     });
 });
 
@@ -734,65 +734,65 @@ function create_new_game() {
     return new_game;
 }
 
-function check_line_match(color,dr,dc,r,c,board){
-    if(board[r][c] === color){
+function check_line_match(color, dr, dc, r, c, board) {
+    if (board[r][c] === color) {
         return true;
     }
 
-    if(board[r][c] === ' '){
+    if (board[r][c] === ' ') {
         return false;
     }
 
     /** Check to make sure we aren't going to walk off the board */
-    if(( r + dr < 0) || ( r + dr > 7 )){
+    if ((r + dr < 0) || (r + dr > 7)) {
         return false;
     }
 
-    if(( c + dc < 0) || ( c + dc > 7 )){
+    if ((c + dc < 0) || (c + dc > 7)) {
         return false;
     }
 
-    return (check_line_match(color,dr,dc,r + dr, c + dc,board))
+    return (check_line_match(color, dr, dc, r + dr, c + dc, board))
 }
 /** Return true if r + dr supports playing at r and c + dc supports playing */
-function adjacent_support(who, dr, dc, r, c, board){
+function adjacent_support(who, dr, dc, r, c, board) {
     let other;
-    if (who === "b"){
+    if (who === "b") {
         other = "w"
-    } else if (who === "w"){
+    } else if (who === "w") {
         other = "b"
     } else {
-        log("houston we have a problem:"+who);
+        log("houston we have a problem:" + who);
         return false;
     }
 
     /** Check to make sure that the adjacent support is on the board */
-    if(( r + dr < 0) || ( r + dr > 7 )){
+    if ((r + dr < 0) || (r + dr > 7)) {
         return false;
     }
 
-    if(( c + dc < 0) || ( c + dc > 7 )){
+    if ((c + dc < 0) || (c + dc > 7)) {
         return false;
     }
 
     /** Check that the opposite color is present*/
-    if(board[r+dr][c+dc] !== other){
+    if (board[r + dr][c + dc] !== other) {
         return false;
     }
 
     /** Check to make sure that tthere is space for a matching color to capture tokens */
-    if(( r + dr + dr < 0) || ( r + dr + dr > 7 )){
+    if ((r + dr + dr < 0) || (r + dr + dr > 7)) {
         return false;
     }
 
-    if(( c + dc + dc < 0) || ( c + dc + dc > 7 )){
+    if ((c + dc + dc < 0) || (c + dc + dc > 7)) {
         return false;
     }
 
-    return check_line_match(who,dr,dc,r+dr+dr, c+dc+dc, board);
+    return check_line_match(who, dr, dc, r + dr + dr, c + dc + dc, board);
 }
 
-function calculate_legal_move(who, board){
+function calculate_legal_move(who, board) {
     let legal_moves = [
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -804,24 +804,24 @@ function calculate_legal_move(who, board){
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     ];
 
-    for(let row =0; row < 8; row++){
-        for(let column = 0; column < 8; column++){
-            if(row === 2 && column === 2) {
+    for (let row = 0; row < 8; row++) {
+        for (let column = 0; column < 8; column++) {
+            if (row === 2 && column === 2) {
                 console.log(row + " " + column)
             }
-            if(board[row][column] === ' '){
-                nw = adjacent_support(who, -1, -1, row, column,board);
-                nn = adjacent_support(who, -1, 0, row, column,board);
-                ne = adjacent_support(who,-1, 1, row, column,board);
+            if (board[row][column] === ' ') {
+                nw = adjacent_support(who, -1, -1, row, column, board);
+                nn = adjacent_support(who, -1, 0, row, column, board);
+                ne = adjacent_support(who, -1, 1, row, column, board);
 
-                ww = adjacent_support(who, 0, -1, row, column,board);
-                ee = adjacent_support(who,0, 1, row, column, board);
+                ww = adjacent_support(who, 0, -1, row, column, board);
+                ee = adjacent_support(who, 0, 1, row, column, board);
 
-                sw = adjacent_support(who, 1, -1, row, column,board);
-                ss = adjacent_support(who, 1, 0, row, column,board);
-                se = adjacent_support(who, 1, 1, row, column,board);
+                sw = adjacent_support(who, 1, -1, row, column, board);
+                ss = adjacent_support(who, 1, 0, row, column, board);
+                se = adjacent_support(who, 1, 1, row, column, board);
 
-                if(nw || nn || ne || ww || ee || sw || ss | se) {
+                if (nw || nn || ne || ww || ee || sw || ss | se) {
                     legal_moves[row][column] = who;
                 }
             }
@@ -831,24 +831,24 @@ function calculate_legal_move(who, board){
     return legal_moves;
 }
 
-function flip_line(who,dr,dc,r,c,board){
-    if(( r + dr < 0) || ( r + dr > 7 )){
+function flip_line(who, dr, dc, r, c, board) {
+    if ((r + dr < 0) || (r + dr > 7)) {
         return false;
     }
 
-    if(( c + dc < 0) || ( c + dc > 7 )){
+    if ((c + dc < 0) || (c + dc > 7)) {
         return false;
     }
 
-    if(board[r+dr][c+dc] === " "){
+    if (board[r + dr][c + dc] === " ") {
         return false;
     }
 
-    if(board[r+dr][c+dc] === who){
+    if (board[r + dr][c + dc] === who) {
         return true;
-    }else{
-        if(flip_line(who,dr,dc,r+dr,c+dc,board)){
-            board[r+dr][c+dc] = who;
+    } else {
+        if (flip_line(who, dr, dc, r + dr, c + dc, board)) {
+            board[r + dr][c + dc] = who;
             return true;
         } else {
             return false;
@@ -857,13 +857,13 @@ function flip_line(who,dr,dc,r,c,board){
 
 }
 
-function flip_tokens(who, row, column, board){
+function flip_tokens(who, row, column, board) {
     flip_line(who, -1, -1, row, column, board);
     flip_line(who, -1, 0, row, column, board);
-    flip_line(who,-1, 1, row, column, board);
+    flip_line(who, -1, 1, row, column, board);
 
     flip_line(who, 0, -1, row, column, board);
-    flip_line(who,0, 1, row, column, board);
+    flip_line(who, 0, 1, row, column, board);
 
     flip_line(who, 1, -1, row, column, board);
     flip_line(who, 1, 0, row, column, board);
@@ -885,16 +885,16 @@ function send_game_update(socket, game_id, message) {
 
     /** make sure that only 2 peple are in the room*/
     /**Assign this socket a color */
-    io.of('/').to(game_id).allSockets().then((sockets) =>{
+    io.of('/').to(game_id).allSockets().then((sockets) => {
         const iterator = sockets[Symbol.iterator]();
 
         if (sockets.size >= 1) {
             let first = iterator.next().value;
 
-            if((games[game_id].player_white.socket != first) && 
-               (games[game_id].player_black.socket != first)){
+            if ((games[game_id].player_white.socket != first) &&
+                (games[game_id].player_black.socket != first)) {
                 /** Player does not have color */
-                if(games[game_id].player_white.socket === ""){
+                if (games[game_id].player_white.socket === "") {
                     /**this play should be white */
                     console.log("White is assigned to: " + first);
                     games[game_id].player_white.socket = first;
@@ -910,14 +910,14 @@ function send_game_update(socket, game_id, message) {
                     io.in(first).socketsLeave([game_id])
                 }
             }
-        } 
-         
+        }
+
         if (sockets.size >= 2) {
             let second = iterator.next().value;
-            if((games[game_id].player_white.socket != second) && 
-               (games[game_id].player_black.socket != second)){
+            if ((games[game_id].player_white.socket != second) &&
+                (games[game_id].player_black.socket != second)) {
                 /** Player does not have color */
-                if(games[game_id].player_black.socket === ""){
+                if (games[game_id].player_black.socket === "") {
                     /**this play should be white */
                     console.log("White is assigned to second: " + second);
                     games[game_id].player_black.socket = second;
@@ -935,7 +935,7 @@ function send_game_update(socket, game_id, message) {
             }
         }
 
-         /** Send game update */
+        /** Send game update */
         let payload = {
             result: 'success',
             game_id: game_id,
@@ -951,8 +951,8 @@ function send_game_update(socket, game_id, message) {
     let legal_moves = 0;
     let whitesum = 0;
     let blacksum = 0
-    for (let row = 0; row < 8; row++){
-        for (let column = 0; column < 8; column++){
+    for (let row = 0; row < 8; row++) {
+        for (let column = 0; column < 8; column++) {
             if (games[game_id].legal_moves[row][column] != " ") {
                 legal_moves++;
             }
@@ -967,10 +967,10 @@ function send_game_update(socket, game_id, message) {
 
     if (legal_moves === 0) {
         let winner = "Tie Game";
-        if(whitesum > blacksum){
+        if (whitesum > blacksum) {
             winner = "Blue";
         }
-        if(whitesum < blacksum){
+        if (whitesum < blacksum) {
             winner = "Red";
         }
         let payload = {
@@ -980,14 +980,14 @@ function send_game_update(socket, game_id, message) {
             who_won: winner
         }
 
-        io.in(game_id).emit("game_over",payload);
+        io.in(game_id).emit("game_over", payload);
 
         /** Delete old games after one hour */
         setTimeout(
             ((id) => {
-                return (()=>{
+                return (() => {
                     delete games[id];
-                }) 
+                })
             })(game_id), 60 * 60 * 1000
         )
     }
