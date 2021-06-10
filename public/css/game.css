@@ -16,6 +16,10 @@
     padding: 1rem 1.5rem;
 }
 
+#game_over h1 {
+    font-size: 3rem;
+}
+
 #my_color h3 {
     margin: 10px 0;
 }

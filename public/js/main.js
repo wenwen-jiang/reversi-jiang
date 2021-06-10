@@ -451,16 +451,16 @@ socket.on('game_over', (payload) => {
 
     /** Announce with a button to the lobby */
     let nodeA = $("<div id='game_over'></div>");
-    let nodeB = $("<h1>Game Over</h1>");
-    let nodeC = $("<h2>" + payload.who_won + " won! </h2>");
-    let nodeD = $("<a href='lobby.html?username=" + username + "' class='btn btn-lg btn-primary' role='button'>Return to lobby</a>");
+    let nodeB = $("<h2>Game Over</h2>");
+    let nodeC = $("<h1>" + payload.who_won + " won! </h1>");
+    let nodeD = $("<a href='lobby.html?username=" + username + "' class='btn btn-lg btn-primary my-3' role='button'>Return to lobby</a>");
 
     nodeA.append(nodeB)
     nodeA.append(nodeC)
     nodeA.append(nodeD)
     nodeA.hide();
     $("#game_over").replaceWith(nodeA);
-    $("#game_over").css("background-color", "#F55B4B;");
+    $("#game_over").css("background-color", "#FF8B6A;");
     nodeA.show("fade", 1000);
 });
 
